@@ -5,6 +5,7 @@
 * 7.4.2版本有pma漏洞
 * 7.4.5之后的版本（不包括7.4.5）需要强制绑定手机号
 * 7.2.0之前的版本不推荐使用，因为代码改动过大，降级后无法正常使用
+* 8.0.5及以后的版本请在Releases自取（示例：将“https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/LinuxPanel-7.4.0.zip”部分修改为“https://github.com/Baota-Panel/BT-Panel-Linux/releases/download/8.0.5/LinuxPanel-8.0.5.zip”
 
 # 使用方法
 [宝塔回退7.4.5之前版本教程](https://blog.csdn.net/saygoodbyeyo/article/details/132534437)
@@ -40,7 +41,7 @@ wget -O install.sh http://download.bt.cn/install/install_6.0.sh && bash install.
 ### 降级
 下载指定版本降级包
 ```
-curl -L https://github.com/weiwang3056/baota_release/blob/main/LinuxPanel/LinuxPanel-7.4.0.zip\?raw\=true > LinuxPanel-7.4.0.zip
+curl -L https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/LinuxPanel-7.4.0.zip\?raw\=true > LinuxPanel-7.4.0.zip
 ```
 解压对应的降级包，运行panel文件夹中的update.sh脚本即可
 
