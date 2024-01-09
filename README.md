@@ -86,7 +86,7 @@ bt 4
 
   S：需要将markupsafe==2.0.1添加到panel目录下的requirements.txt文件中并执行
 ```
-/www/server/panel/pyenv/bin/pip3 install -r requirements.txt
+/www/server/panel/pyenv/bin/pip3 install -r /root/panel/requirements.txt
 ```
 安装python库后重启面板即可
 
