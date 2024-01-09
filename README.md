@@ -1,12 +1,13 @@
 # 宝塔Linux历史版本存档
-由于宝塔官方的历史版本下载链接失效，故收集了一波历史版本以供使用,可通过降级到历史版本绕过强制绑定手机号以及免费使用专业版插件
+由于宝塔官方的历史版本下载链接已不在官网显示,有些站长又想用旧版本的宝塔，故搜集了所有官方历史版本<br/>
+本仓库所有版本的压缩包通过 download.bt.cn 下载，绝对安全
 
 # 版本说明
 * 7.4.2版本有pma漏洞
 * 7.4.5之后的版本（不包括7.4.5）需要强制绑定手机号
 * 7.2.0之前的版本不推荐使用，因为代码改动过大，降级后无法正常使用
-* 8.0.5及以后的版本请在Releases自取<br/>
-修改示例：将 https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/LinuxPanel-7.4.0.zip 部分修改为 https://github.com/Baota-Panel/BT-Panel-Linux/releases/download/8.0.5/LinuxPanel-8.0.5.zip
+* 8.0.5及以后的版本请在Releases自取<br/><br/>
+修改示例：将 https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/LinuxPanel-8.0.4.zip 部分<br/><br/>修改为 https://github.com/Baota-Panel/BT-Panel-Linux/releases/download/8.0.5/LinuxPanel-8.0.5.zip
 
 # 使用方法
 [宝塔回退7.4.5之前版本教程](https://blog.csdn.net/saygoodbyeyo/article/details/132534437)
@@ -21,30 +22,58 @@
 * Centos安装命令：
 
 ```
-yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
-```
-```
-curl -sSO http://download.bt.cn/install/install_6.0.sh && bash install_panel.sh 
+yum install -y wget && wget -O install.sh https://download.bt.cn/install/install_6.0.sh && sh install.sh ed8484bec
 ```
 * Ubuntu/Deepin安装命令：
 ```
-wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh 
+wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh ed8484bec
 ```
 * Debian安装命令：
 ```
-wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh 
+wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh ed8484bec
 ```
-* Fedora安装命令:
+* 万能安装命令：
 ```
-wget -O install.sh http://download.bt.cn/install/install_6.0.sh && bash install.sh
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec 
+```
+* 国产龙芯架构安装命令:
+```
+wget -O install_panel.sh https://download.bt.cn/install/0/loongarch64/loongarch64_install_panel.sh && bash install_panel.sh ed8484bec
 ```
 
 ### 降级
-下载指定版本降级包
+* 下载curl包
 ```
-curl -L https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/LinuxPanel-7.4.0.zip\?raw\=true > LinuxPanel-7.4.0.zip
+yum install curl
 ```
-解压对应的降级包，运行panel文件夹中的update.sh脚本即可
+Ubuntu/Debian执行这个
+```
+sudo apt install curl
+```
+* 下载离线包（此处以8.0.4为例）
+```
+curl -L https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/LinuxPanel-8.0.4.zip\?raw\=true > LinuxPanel-8.0.4.zip
+```
+* 解压压缩包
+```
+unzip LinuxPanel-*
+```
+* 切换到降级包目录
+```
+cd panel
+```
+* 执行更新脚本
+```
+bash update.sh
+```
+* 删除降级包
+```
+cd .. && rm -f LinuxPanel-*.zip && rm -rf panel
+```
+* 重载宝塔
+```
+bt 4
+```
 
 # 注意事项
 
