@@ -56,7 +56,7 @@ curl -L https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/Linux
 ```
 * 解压压缩包
 ```
-unzip LinuxPanel-*
+unzip LinuxPanel-8.0.4.zip
 ```
 * 切换到降级包目录
 ```
@@ -68,7 +68,7 @@ bash update.sh
 ```
 * 删除降级包
 ```
-cd .. && rm -f LinuxPanel-*.zip && rm -rf panel
+cd .. && rm -f LinuxPanel-8.0.4.zip && rm -rf panel
 ```
 * 重载宝塔
 ```
