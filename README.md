@@ -1,6 +1,8 @@
 # 宝塔Linux历史版本存档
 由于宝塔官方的历史版本下载链接已不在官网显示,有些站长又想用旧版本的宝塔，故搜集了所有官方历史版本<br/>
-本仓库所有版本的压缩包通过 download.bt.cn 下载，绝对安全
+本仓库所有版本的更新包通过 download.bt.cn 下载，绝对安全
+
+正式版会在1-7天左右同步一次（如无更新则不做任何同步）
 
 # 版本说明
 * 7.4.2版本有pma漏洞
@@ -56,7 +58,7 @@ curl -L https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/Linux
 ```
 * 解压压缩包
 ```
-unzip LinuxPanel-8.0.4.zip
+unzip LinuxPanel-*
 ```
 * 切换到降级包目录
 ```
@@ -68,7 +70,7 @@ bash update.sh
 ```
 * 删除降级包
 ```
-cd .. && rm -f LinuxPanel-8.0.4.zip && rm -rf panel
+cd .. && rm -f LinuxPanel-*.zip && rm -rf panel
 ```
 * 重载宝塔
 ```
@@ -77,7 +79,10 @@ bt 4
 
 # 注意事项
 
-* 宝塔降级后会出现密码不正确的情况，修改密码即可（bt 5）
+* 宝塔降级后会出现密码不正确的情况，修改密码即可
+```
+bt 5
+```
 * 为防止宝塔自动升级，建议将宝塔修改为离线模式，进入宝塔面板，选择面板设置 -> 离线模式即可，并修改hosts
 ```
 echo "127.0.0.1 www.bt.cn" >> /etc/hosts
