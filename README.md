@@ -84,6 +84,16 @@ bt 4
 bt 5
 ```
 * 为防止宝塔自动升级，建议将宝塔修改为离线模式，进入宝塔面板，选择面板设置 -> 离线模式即可，并修改hosts
+
+开启离线模式
+```
+echo "True" >/www/server/panel/data/not_network.pl
+```
+关闭离线模式
+```
+rm -rf /www/server/panel/data/not_network.pl && bt restart
+```
+修改hosts
 ```
 echo "127.0.0.1 www.bt.cn" >> /etc/hosts
 ```
