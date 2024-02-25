@@ -101,8 +101,8 @@ echo "127.0.0.1 www.bt.cn" >> /etc/hosts
 # 关于 8.0.4 升级 8.0.5
 
 如果发现 8.0.4 升级到 8.0.5 出现部分站点、数据库丢失（别慌，数据还在） <br/>
-/www/server/panel/data 目录下的 default.db （用Navicat 打开） <br/>
-把 sites 跟 domain 部分的内容，复制到 /www/server/panel/data/db 目录下的 site.db （用Navicat 打开），补全到 site 跟 domain <br/>
+找到 /www/server/panel/data 目录下的 default.db （用Navicat 打开），把 sites 跟 domain 部分的内容 <br/>
+复制到 /www/server/panel/data/db 目录下的 site.db （用Navicat 打开），补全到 site 跟 domain <br/>
 数据库同理，数据库是 /www/server/panel/data/db 目录下 database.db，然后重启面板即可！
 
 讲解：宝塔从 8.0.5 开始 使用 site.db 作为站点跟数据库，导致出现8.0.5丢失部分站点跟数据库 而降级到8.0.4会默认读取default.db里的站点跟数据库<br/>
