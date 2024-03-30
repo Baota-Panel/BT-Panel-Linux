@@ -344,6 +344,7 @@ Install_RPM_Pack(){
 Install_Deb_Pack(){
 	ln -sf bash /bin/sh
 	UBUNTU_22=$(cat /etc/issue|grep "Ubuntu 22")
+	DEBIAN_12=$(cat /etc/issue|grep Debian|grep 12)
 	if [ "${UBUNTU_22}" ];then
 		apt-get remove needrestart -y
 	fi
@@ -375,16 +376,19 @@ Install_Deb_Pack(){
 		apt-get install curl -y
 	fi
 
-	debPacks="wget curl libcurl4-openssl-dev gcc make zip unzip tar openssl libssl-dev gcc libxml2 libxml2-dev zlib1g zlib1g-dev libjpeg-dev libpng-dev lsof libpcre3 libpcre3-dev cron net-tools swig build-essential libffi-dev libbz2-dev libncurses-dev libsqlite3-dev libreadline-dev tk-dev libgdbm-dev libdb-dev libdb++-dev libpcap-dev xz-utils git qrencode";
+	debPacks="wget curl libcurl4-openssl-dev gcc make zip unzip tar openssl libssl-dev gcc libxml2 libxml2-dev zlib1g zlib1g-dev libjpeg-dev libpng-dev lsof libpcre3 libpcre3-dev cron net-tools swig build-essential libffi-dev libbz2-dev libncurses-dev libsqlite3-dev libreadline-dev tk-dev libgdbm-dev libdb-dev libdb++-dev libpcap-dev xz-utils git qrencode sqlite3 ufw";
 	apt-get install -y $debPacks --force-yes
 
-	for debPack in ${debPacks}
-	do
-		packCheck=$(dpkg -l|grep ${debPack})
-		if [ "$?" -ne "0" ] ;then
-			apt-get install -y $debPack
-		fi
-	done
+
+    if [ -z "${UBUNTU_22}" ] || [ "${DEBIAN_12}" ];then
+    	for debPack in ${debPacks}
+    	do
+    		packCheck=$(dpkg -l|grep ${debPack})
+    		if [ "$?" -ne "0" ] ;then
+    			apt-get install -y $debPack
+    		fi
+    	done
+    fi
 
 	if [ ! -d '/etc/letsencrypt' ];then
 		mkdir -p /etc/letsencryp
@@ -689,8 +693,8 @@ Install_Bt(){
 		mv -f ${setup_path}/server/panel/data/port.pl ${setup_path}/server/panel/old_data/port.pl
 		mv -f ${setup_path}/server/panel/data/admin_path.pl ${setup_path}/server/panel/old_data/admin_path.pl
 		
-		if [ -f "${setup_path}/server/panel/data/db/default.db" ];then
-			mv -f ${setup_path}/server/panel/data/db/ ${setup_path}/server/panel/old_data/
+		if [ -d "${setup_path}/server/panel/data/db" ];then
+			\cp -r ${setup_path}/server/panel/data/db ${setup_path}/server/panel/old_data/
 		fi
 		
 	fi
@@ -712,8 +716,8 @@ Install_Bt(){
 		mv -f ${setup_path}/server/panel/old_data/port.pl ${setup_path}/server/panel/data/port.pl
 		mv -f ${setup_path}/server/panel/old_data/admin_path.pl ${setup_path}/server/panel/data/admin_path.pl
 		
-		if [ -f "${setup_path}/server/panel/old_data/db/default.db" ];then
-			mv -f ${setup_path}/server/panel/old_data/db/ ${setup_path}/server/panel/data/db
+		if [ -d "${setup_path}/server/panel/old_data/db" ];then
+			\cp -r ${setup_path}/server/panel/old_data/db ${setup_path}/server/panel/data/
 		fi
 		
 		if [ -d "/${setup_path}/server/panel/old_data" ];then
@@ -775,15 +779,20 @@ Set_Bt_Panel(){
 		echo "/${auth_path}" > ${admin_auth}
 	fi
 	chmod -R 700 $pyenv_path/pyenv/bin
-	btpip install docxtpl==0.16.7
-	/www/server/panel/pyenv/bin/pip3 install pymongo
-	/www/server/panel/pyenv/bin/pip3 install psycopg2-binary
-	/www/server/panel/pyenv/bin/pip3 install flask -U
-	/www/server/panel/pyenv/bin/pip3 install flask-sock
-	btpip install simple-websocket==0.10.0
-	btpip install natsort
-	btpip uninstall enum34 -y
-	btpip install geoip2==4.7.0
+	if [ ! -f "/www/server/panel/pyenv/n.pl" ];then
+    	btpip install docxtpl==0.16.7
+    	/www/server/panel/pyenv/bin/pip3 install pymongo
+    	/www/server/panel/pyenv/bin/pip3 install psycopg2-binary
+    	/www/server/panel/pyenv/bin/pip3 install flask -U
+    	/www/server/panel/pyenv/bin/pip3 install flask-sock
+    	/www/server/panel/pyenv/bin/pip3 install -I gevent
+    	btpip install simple-websocket==0.10.0
+    	btpip install natsort
+    	btpip uninstall enum34 -y
+    	btpip install geoip2==4.7.0
+    	btpip install brotli
+    fi
+    btpip install PyMySQL
 	auth_path=$(cat ${admin_auth})
 	cd ${setup_path}/server/panel/
 	/etc/init.d/bt start
@@ -798,7 +807,9 @@ Set_Bt_Panel(){
 	chmod 600 ${setup_path}/server/panel/default.pl
 	sleep 3
 	if [ "$SET_SSL" == true ]; then
-        btpip install -I pyOpenSSl 2>/dev/null
+	    if [ ! -f "/www/server/panel/pyenv/n.pl" ];then
+            btpip install -I pyOpenSSl 2>/dev/null
+        fi
         btpython /www/server/panel/tools.py ssl
     fi
 	/etc/init.d/bt restart 	
@@ -822,11 +833,13 @@ Set_Bt_Panel(){
 		btpython -c 'import tools;tools.set_panel_username("'$PANEL_USER'")'
 		cd ~
 	fi
+	if [ -f "/usr/bin/sqlite3" ] ;then
+	    sqlite3 /www/server/panel/data/db/panel.db "UPDATE config SET status = '1' WHERE id = '1';"  > /dev/null 2>&1
+    fi
 }
 Set_Firewall(){
 	sshPort=$(cat /etc/ssh/sshd_config | grep 'Port '|awk '{print $2}')
 	if [ "${PM}" = "apt-get" ]; then
-		apt-get install -y ufw
 		if [ -f "/usr/sbin/ufw" ];then
 			ufw allow 20/tcp
 			ufw allow 21/tcp
@@ -1042,9 +1055,18 @@ echo -e " 点击【高级】-【继续访问】或【接受风险并继续】访
 echo -e " 教程：https://www.bt.cn/bbs/thread-117246-1-1.html"
 echo -e "" 
 echo -e "=================================================================="
+echo -e ""
+echo -e "宝塔面板交流QQ群：633748484"
+echo -e ""
+echo -e "=================================================================="
 endTime=`date +%s`
 ((outTime=($endTime-$startTime)/60))
-echo -e "Time consumed:\033[32m $outTime \033[0mMinute!"
+if [ "${outTime}" == "0" ];then
+	((outTime=($endTime-$startTime)))
+	echo -e "Time consumed:\033[32m $outTime \033[0mseconds!"
+else
+	echo -e "Time consumed:\033[32m $outTime \033[0mMinute!"
+fi
 
 
 

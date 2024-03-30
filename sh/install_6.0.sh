@@ -63,17 +63,17 @@ GetSysInfo(){
 	echo -e "============================================"
 	echo -e "请截图以上报错信息发帖至论坛www.bt.cn/bbs求助"
 	echo -e "============================================"
-	if [ -f "/usr/bin/qrencode" ];then
-		echo -e "或微信扫码联系企业微信技术求助"
-		echo -e "============================================"
-		qrencode -t ANSIUTF8 "https://work.weixin.qq.com/kfid/kfc9072f0e29a53bd52"
-		echo -e "============================================"
-	else
-		echo -e "或手机访问以下链接、扫码联系企业微信技术求助"
-		echo -e "============================================"
-		echo -e "联系链接:https://work.weixin.qq.com/kfid/kfc9072f0e29a53bd52"
-		echo -e "============================================"
-	fi
+# 	if [ -f "/usr/bin/qrencode" ];then
+# 		echo -e "或微信扫码联系企业微信技术求助"
+# 		echo -e "============================================"
+# 		qrencode -t ANSIUTF8 "https://work.weixin.qq.com/kfid/kfc9072f0e29a53bd52"
+# 		echo -e "============================================"
+# 	else
+# 		echo -e "或手机访问以下链接、扫码联系企业微信技术求助"
+# 		echo -e "============================================"
+# 		echo -e "联系链接:https://work.weixin.qq.com/kfid/kfc9072f0e29a53bd52"
+# 		echo -e "============================================"
+# 	fi
 }
 Red_Error(){
 	echo '=================================================';
@@ -122,6 +122,14 @@ Set_Ssl(){
     	SET_SSL=""
     fi
 }
+Add_lib_Install(){
+	Get_Versions
+	if [ "${os_type}" == "el" ] && [ "${os_version}" == "7" ];then
+		cd /www/server/panel/class
+		#btpython -c "import panelPlugin; plugin = panelPlugin.panelPlugin(); plugin.check_install_lib('1')"
+		#echo "True" > /tmp/panelTask.pl
+	fi
+}
 Get_Pack_Manager(){
 	if [ -f "/usr/bin/yum" ] && [ -d "/etc/yum.repos.d" ]; then
 		PM="yum"
@@ -139,6 +147,8 @@ Auto_Swap()
 	if [ ! -d /www ];then
 		mkdir /www
 	fi
+	echo "正在设置虚拟内存，请稍等..........";
+	echo '---------------------------------------------';
 	swapFile="/www/swap"
 	dd if=/dev/zero of=$swapFile bs=1M count=1025
 	mkswap -f $swapFile
@@ -208,7 +218,7 @@ get_node_url(){
 	
 	echo '---------------------------------------------';
 	echo "Selected download node...";
-	nodes=(https://dg2.bt.cn https://download.bt.cn https://ctcc1-node.bt.cn https://cmcc1-node.bt.cn https://ctcc2-node.bt.cn https://hk1-node.bt.cn https://na1-node.bt.cn https://jp1-node.bt.cn);
+	nodes=(https://dg2.bt.cn https://download.bt.cn https://ctcc1-node.bt.cn https://cmcc1-node.bt.cn https://ctcc2-node.bt.cn https://hk1-node.bt.cn https://na1-node.bt.cn https://jp1-node.bt.cn https://cf1-node.aapanel.com);
 
 	if [ "$1" ];then
 		nodes=($(echo ${nodes[*]}|sed "s#${1}##"))
@@ -227,7 +237,7 @@ get_node_url(){
 		NODE_STATUS=$(echo ${NODE_CHECK}|awk '{print $2}')
 		TIME_TOTAL=$(echo ${NODE_CHECK}|awk '{print $3 * 1000 - 500 }'|cut -d '.' -f 1)
 		if [ "${NODE_STATUS}" == "200" ];then
-			if [ $TIME_TOTAL -lt 100 ];then
+			if [ $TIME_TOTAL -lt 300 ];then
 				if [ $RES -ge 1500 ];then
 					echo "$RES $node" >> $tmp_file1
 				fi
@@ -238,8 +248,8 @@ get_node_url(){
 			fi
 
 			i=$(($i+1))
-			if [ $TIME_TOTAL -lt 100 ];then
-				if [ $RES -ge 3000 ];then
+			if [ $TIME_TOTAL -lt 300 ];then
+				if [ $RES -ge 2390 ];then
 					break;
 				fi
 			fi	
@@ -375,7 +385,7 @@ Install_Deb_Pack(){
 		apt-get install curl -y
 	fi
 
-	debPacks="wget curl libcurl4-openssl-dev gcc make zip unzip tar openssl libssl-dev gcc libxml2 libxml2-dev zlib1g zlib1g-dev libjpeg-dev libpng-dev lsof libpcre3 libpcre3-dev cron net-tools swig build-essential libffi-dev libbz2-dev libncurses-dev libsqlite3-dev libreadline-dev tk-dev libgdbm-dev libdb-dev libdb++-dev libpcap-dev xz-utils git qrencode";
+	debPacks="wget curl libcurl4-openssl-dev gcc make zip unzip tar openssl libssl-dev gcc libxml2 libxml2-dev zlib1g zlib1g-dev libjpeg-dev libpng-dev lsof libpcre3 libpcre3-dev cron net-tools swig build-essential libffi-dev libbz2-dev libncurses-dev libsqlite3-dev libreadline-dev tk-dev libgdbm-dev libdb-dev libdb++-dev libpcap-dev xz-utils git qrencode sqlite3";
 	apt-get install -y $debPacks --force-yes
 
 	for debPack in ${debPacks}
@@ -480,7 +490,7 @@ Install_Python_Lib(){
 			chmod -R 700 $pyenv_path/pyenv/bin
 			is_package=$($python_bin -m psutil 2>&1|grep package)
 			if [ "$is_package" = "" ];then
-				wget -O $pyenv_path/pyenv/pip.txt $download_Url/install/pyenv/pip.txt -T 5
+				wget -O $pyenv_path/pyenv/pip.txt $download_Url/install/pyenv/pip.txt -T 15
 				$pyenv_path/pyenv/bin/pip install -U pip
 				$pyenv_path/pyenv/bin/pip install -U setuptools==65.5.0
 				$pyenv_path/pyenv/bin/pip install -r $pyenv_path/pyenv/pip.txt
@@ -553,13 +563,15 @@ Install_Python_Lib(){
 		os_version=""
 		rm -f /www/server/panel/pymake.pl
 	fi	
-
+	echo "==============================================="
+	echo "正在下载面板运行环境，请稍等..............."
+	echo "==============================================="
 	if [ "${os_version}" != "" ];then
 		pyenv_file="/www/pyenv.tar.gz"
-		wget -O $pyenv_file $download_Url/install/pyenv/pyenv-${os_type}${os_version}-x${is64bit}.tar.gz -T 10
+		wget -O $pyenv_file $download_Url/install/pyenv/pyenv-${os_type}${os_version}-x${is64bit}.tar.gz -T 15
 		if [ "$?" != "0" ];then
 			get_node_url $download_Url
-			wget -O $pyenv_file $download_Url/install/pyenv/pyenv-${os_type}${os_version}-x${is64bit}.tar.gz -T 10
+			wget -O $pyenv_file $download_Url/install/pyenv/pyenv-${os_type}${os_version}-x${is64bit}.tar.gz -T 15
 		fi
 		tmp_size=$(du -b $pyenv_file|awk '{print $1}')
 		if [ $tmp_size -lt 703460 ];then
@@ -590,7 +602,7 @@ Install_Python_Lib(){
 	cd /www
 	python_src='/www/python_src.tar.xz'
 	python_src_path="/www/Python-${py_version}"
-	wget -O $python_src $download_Url/src/Python-${py_version}.tar.xz -T 5
+	wget -O $python_src $download_Url/src/Python-${py_version}.tar.xz -T 15
 	tmp_size=$(du -b $python_src|awk '{print $1}')
 	if [ $tmp_size -lt 10703460 ];then
 		rm -f $python_src
@@ -670,9 +682,12 @@ Install_Bt(){
 		sleep 1
 	fi
 
-	wget -O /etc/init.d/bt ${download_Url}/install/src/bt6.init -T 10
-	wget -O /www/server/panel/install/public.sh ${download_Url}/install/public.sh -T 10
-	wget -O panel.zip ${download_Url}/install/src/panel6.zip -T 10
+	wget -O /etc/init.d/bt ${download_Url}/install/src/bt6.init -T 15
+	wget -O /www/server/panel/install/public.sh ${download_Url}/install/public.sh -T 15
+	echo "=============================================="
+	echo "正在下载面板文件,请稍等..................."
+	echo "=============================================="
+	wget -O panel.zip ${download_Url}/install/src/panel6.zip -T 15
 
 	if [ -f "${setup_path}/server/panel/data/default.db" ];then
 		if [ -d "/${setup_path}/server/panel/old_data" ];then
@@ -686,8 +701,8 @@ Install_Bt(){
 		mv -f ${setup_path}/server/panel/data/port.pl ${setup_path}/server/panel/old_data/port.pl
 		mv -f ${setup_path}/server/panel/data/admin_path.pl ${setup_path}/server/panel/old_data/admin_path.pl
 		
-		if [ -f "${setup_path}/server/panel/data/db/default.db" ];then
-			mv -f ${setup_path}/server/panel/data/db/ ${setup_path}/server/panel/old_data/
+		if [ -d "${setup_path}/server/panel/data/db" ];then
+			\cp -r ${setup_path}/server/panel/data/db ${setup_path}/server/panel/old_data/
 		fi
 		
 	fi
@@ -709,8 +724,8 @@ Install_Bt(){
 		mv -f ${setup_path}/server/panel/old_data/port.pl ${setup_path}/server/panel/data/port.pl
 		mv -f ${setup_path}/server/panel/old_data/admin_path.pl ${setup_path}/server/panel/data/admin_path.pl
 		
-		if [ -f "${setup_path}/server/panel/old_data/db/default.db" ];then
-			mv -f ${setup_path}/server/panel/old_data/db/ ${setup_path}/server/panel/data/db
+		if [ -d "${setup_path}/server/panel/old_data/db" ];then
+			\cp -r ${setup_path}/server/panel/old_data/db ${setup_path}/server/panel/data/
 		fi
 		
 		if [ -d "/${setup_path}/server/panel/old_data" ];then
@@ -737,8 +752,8 @@ Install_Bt(){
 	chmod -R +x ${setup_path}/server/panel/script
 	ln -sf /etc/init.d/bt /usr/bin/bt
 	echo "${panelPort}" > ${setup_path}/server/panel/data/port.pl
-	wget -O /etc/init.d/bt ${download_Url}/install/src/bt7.init -T 10
-	wget -O /www/server/panel/init.sh ${download_Url}/install/src/bt7.init -T 10
+	wget -O /etc/init.d/bt ${download_Url}/install/src/bt7.init -T 15
+	wget -O /www/server/panel/init.sh ${download_Url}/install/src/bt7.init -T 15
 	wget -O /www/server/panel/data/softList.conf ${download_Url}/install/conf/softList.conf
 
   	if [ ! -f "${setup_path}/server/panel/data/installCount.pl" ];then
@@ -772,15 +787,20 @@ Set_Bt_Panel(){
 		echo "/${auth_path}" > ${admin_auth}
 	fi
 	chmod -R 700 $pyenv_path/pyenv/bin
-	btpip install docxtpl==0.16.7
-	/www/server/panel/pyenv/bin/pip3 install pymongo
-	/www/server/panel/pyenv/bin/pip3 install psycopg2-binary
-	/www/server/panel/pyenv/bin/pip3 install flask -U
-	/www/server/panel/pyenv/bin/pip3 install flask-sock
-	btpip install simple-websocket==0.10.0
-	btpip install natsort
-	btpip uninstall enum34 -y
-	btpip install geoip2==4.7.0
+	if [ ! -f "/www/server/panel/pyenv/n.pl" ];then
+		btpip install docxtpl==0.16.7
+		/www/server/panel/pyenv/bin/pip3 install pymongo
+		/www/server/panel/pyenv/bin/pip3 install psycopg2-binary
+		/www/server/panel/pyenv/bin/pip3 install flask -U
+		/www/server/panel/pyenv/bin/pip3 install flask-sock
+		/www/server/panel/pyenv/bin/pip3 install -I gevent
+		btpip install simple-websocket==0.10.0
+		btpip install natsort
+		btpip uninstall enum34 -y
+		btpip install geoip2==4.7.0
+		btpip install brotli
+		btpip install PyMySQL
+	fi
 	auth_path=$(cat ${admin_auth})
 	cd ${setup_path}/server/panel/
 	/etc/init.d/bt start
@@ -795,8 +815,19 @@ Set_Bt_Panel(){
 	chmod 600 ${setup_path}/server/panel/default.pl
 	sleep 3
 	if [ "$SET_SSL" == true ]; then
-        btpip install -I pyOpenSSl 2>/dev/null
-        btpython /www/server/panel/tools.py ssl
+		if [ ! -f "/www/server/panel/pyenv/n.pl" ];then
+        	btpip install -I pyOpenSSl 2>/dev/null
+    	fi
+    	echo "========================================"
+    	echo "正在开启面板SSL，请稍等............ "
+    	echo "========================================"
+        SSL_STATUS=$(btpython /www/server/panel/tools.py ssl)
+        if [ "${SSL_STATUS}" == "0" ] ;then
+        	echo -n " -4 " > /www/server/panel/data/v4.pl
+        	btpython /www/server/panel/tools.py ssl
+        fi
+    	echo "证书开启成功！"
+    	echo "========================================"
     fi
 	/etc/init.d/bt restart 	
 	sleep 3
@@ -819,6 +850,9 @@ Set_Bt_Panel(){
 		btpython -c 'import tools;tools.set_panel_username("'$PANEL_USER'")'
 		cd ~
 	fi
+	if [ -f "/usr/bin/sqlite3" ] ;then
+	    sqlite3 /www/server/panel/data/db/panel.db "UPDATE config SET status = '1' WHERE id = '1';"  > /dev/null 2>&1
+    fi
 }
 Set_Firewall(){
 	sshPort=$(cat /etc/ssh/sshd_config | grep 'Port '|awk '{print $2}')
@@ -952,6 +986,7 @@ Install_Main(){
 
 	Get_Ip_Address
 	Setup_Count ${IDC_CODE}
+	Add_lib_Install
 }
 
 echo "
@@ -1024,24 +1059,31 @@ fi
 echo > /www/server/panel/data/bind.pl
 echo -e "=================================================================="
 echo -e "\033[32mCongratulations! Installed successfully!\033[0m"
+echo -e "=============注意：首次打开面板浏览器将提示不安全================="
+echo -e ""
+echo -e " 请选择以下其中一种方式解决不安全提醒"
+echo -e " 1、下载证书，地址：https://dg2.bt.cn/ssl/baota_root.pfx，双击安装,密码【www.bt.cn】"
+echo -e " 2、点击【高级】-【继续访问】或【接受风险并继续】访问"
+echo -e " 教程：https://www.bt.cn/bbs/thread-117246-1-1.html"
+echo -e "" 
 echo -e "========================面板账户登录信息=========================="
 echo -e ""
+echo -e " 【云服务器】请在安全组放行 $panelPort 端口"
 echo -e " 外网面板地址: ${HTTP_S}://${getIpAddress}:${panelPort}${auth_path}"
 echo -e " 内网面板地址: ${HTTP_S}://${LOCAL_IP}:${panelPort}${auth_path}"
 echo -e " username: $username"
 echo -e " password: $password"
-echo -e " "
-echo -e "=========================打开面板前请看==========================="
 echo -e ""
-echo -e " 【云服务器】请在安全组放行 $panelPort 端口"
-echo -e " 因默认启用自签证书https加密访问，浏览器将提示不安全"
-echo -e " 点击【高级】-【继续访问】或【接受风险并继续】访问"
-echo -e " 教程：https://www.bt.cn/bbs/thread-117246-1-1.html"
-echo -e "" 
+echo -e " 宝塔面板交流QQ群：633748484"
 echo -e "=================================================================="
 endTime=`date +%s`
 ((outTime=($endTime-$startTime)/60))
-echo -e "Time consumed:\033[32m $outTime \033[0mMinute!"
+if [ "${outTime}" == "0" ];then
+	((outTime=($endTime-$startTime)))
+	echo -e "Time consumed:\033[32m $outTime \033[0mseconds!"
+else
+	echo -e "Time consumed:\033[32m $outTime \033[0mMinute!"
+fi
 
 
 

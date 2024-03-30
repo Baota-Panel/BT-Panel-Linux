@@ -21,19 +21,25 @@ if [ ! -f "/www/server/panel/pyenv/bin/python3" ];then
 	echo "请截图发帖至论坛www.bt.cn/bbs求助"
 	exit 0;
 fi
+Centos6Check=$(cat /etc/redhat-release | grep ' 6.' | grep -iE 'centos|Red Hat')
+if [ "${Centos6Check}" ];then
+	echo "Centos6不支持升级宝塔面板，建议备份数据重装更换Centos7/8安装宝塔面板"
+	exit 1
+fi 
 
-public_file=/www/server/panel/install/public.sh
-publicFileMd5=$(md5sum ${public_file} 2>/dev/null|awk '{print $1}')
-md5check="acfc18417ee58c64ff99d186f855e3e1"
-if [ "${publicFileMd5}" != "${md5check}"  ]; then
-	wget -O Tpublic.sh http://download.bt.cn/install/public.sh -T 2 -t 1;
-	publicFileMd5=$(md5sum Tpublic.sh 2>/dev/null|awk '{print $1}')
-	if [ "${publicFileMd5}" == "${md5check}"  ]; then
-		\cp -rpa Tpublic.sh $public_file
-	fi
-	rm -f Tpublic.sh
-fi
-. $public_file
+# public_file=/www/server/panel/install/public.sh
+# publicFileMd5=$(md5sum ${public_file} 2>/dev/null|awk '{print $1}')
+# md5check="acfc18417ee58c64ff99d186f855e3e1"
+# if [ "${publicFileMd5}" != "${md5check}"  ]; then
+# 	wget -O Tpublic.sh http://download.bt.cn/install/public.sh -T 2 -t 1;
+# 	publicFileMd5=$(md5sum Tpublic.sh 2>/dev/null|awk '{print $1}')
+# 	if [ "${publicFileMd5}" == "${md5check}"  ]; then
+# 		\cp -rpa Tpublic.sh $public_file
+# 	fi
+# 	rm -f Tpublic.sh
+# fi
+# . $public_file
+#download_Url=$NODE_URL
 
 Centos8Check=$(cat /etc/redhat-release | grep ' 8.' | grep -iE 'centos|Red Hat')
 if [ "${Centos8Check}" ];then
@@ -48,7 +54,15 @@ if [ -f $env_path ];then
 	mypip="/www/server/panel/pyenv/bin/pip"
 fi
 
-download_Url=$NODE_URL
+if [ -f "/www/server/panel/data/down_url.pl" ];then
+	D_NODE_URL=$(cat /www/server/panel/data/down_url.pl|grep bt.cn)
+fi
+
+if [ -z "${D_NODE_URL}" ];then
+	D_NODE_URL="download.bt.cn"
+fi
+
+download_Url=$D_NODE_URL
 
 wget -O fix_install.sh $download_Url/tools/fix_install.sh
 nohup bash fix_install.sh > /www/server/panel/install/fix.log 2>&1 &
@@ -117,6 +131,20 @@ fi
 pymysql=$(echo "$pip_list"|grep pymysql)
 if [ "$pymysql" = "" ];then
 	$mypip install pymysql
+fi
+GEVENT_V=$(btpip list 2> /dev/null|grep "gevent "|awk '{print $2}'|cut -f 1 -d '.')
+if [ "${GEVENT_V}" -le "1" ];then
+    /www/server/panel/pyenv/bin/pip3 install -I gevent
+fi
+
+BROTLI_C=$(btpip list 2> /dev/null |grep Brotli)
+if [ -z "$BROTLI_C" ]; then
+    btpip install brotli
+fi
+
+PYMYSQL_C=$(btpip list 2> /dev/null |grep PyMySQL)
+if [ -z "$PYMYSQL_C" ]; then
+    btpip install PyMySQL
 fi
 
 btpip uninstall enum34 -y
