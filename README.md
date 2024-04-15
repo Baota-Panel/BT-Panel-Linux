@@ -9,7 +9,6 @@
 * 7.4.5之后的版本（不包括7.4.5）需要强制绑定手机号
 * 7.2.0之前的版本不推荐使用，因为代码改动过大，降级后无法正常使用
 * 8.0.5及以后的版本请在Releases自取<br/><br/>
-修改示例：将 https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/LinuxPanel-8.0.4.zip 部分<br/><br/>修改为 https://github.com/Baota-Panel/BT-Panel-Linux/releases/download/8.0.5/LinuxPanel-8.0.5.zip
 
 # 使用方法
 [宝塔回退7.4.5之前版本教程](https://blog.csdn.net/saygoodbyeyo/article/details/132534437)
@@ -52,9 +51,9 @@ Ubuntu/Debian执行这个
 ```
 sudo apt install curl
 ```
-* 下载离线包（此处以8.0.4为例）
+* 下载离线包（此处以8.0.5为例）
 ```
-curl -L https://github.com/Baota-Panel/BT-Panel-Linux/blob/main/LinuxPanel/LinuxPanel-8.0.4.zip\?raw\=true > LinuxPanel-8.0.4.zip
+curl -L https://github.com/Baota-Panel/BT-Panel-Linux/releases/download/8.0.5/LinuxPanel-8.0.5.zip\?raw\=true > LinuxPanel-8.0.5.zip
 ```
 * 解压压缩包
 ```
