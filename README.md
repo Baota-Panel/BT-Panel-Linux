@@ -22,26 +22,89 @@
 ### 安装宝塔
 
 先使用宝塔官方的安装脚本安装最新版宝塔
-* Centos安装命令：
-
+* Centos安装命令：[默认线路]
 ```
 yum install -y wget && wget -O install.sh https://download.bt.cn/install/install_6.0.sh && sh install.sh ed8484bec
 ```
-* Ubuntu/Deepin安装命令：
+* Centos安装命令：[电信线路]
+```
+yum install -y wget && wget -O install.sh https://cmcc1-node.bt.cn/install/install_6.0.sh && sh install.sh ed8484bec
+```
+* Centos安装命令：[香港线路]
+```
+yum install -y wget && wget -O install.sh https://hk1-node.bt.cn/install/install_6.0.sh && sh install.sh ed8484bec
+```
+* Centos安装命令：[欧美线路]
+```
+yum install -y wget && wget -O install.sh https://cf1-node.aapanel.com/install/install_6.0.sh && sh install.sh ed8484bec
+```
+---
+* Ubuntu/Deepin安装命令：[默认线路]
 ```
 wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh ed8484bec
 ```
-* Debian安装命令：
+* Ubuntu/Deepin安装命令：[电信线路]
+```
+wget -O install.sh https://cmcc1-node.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh ed8484bec
+```
+* Ubuntu/Deepin安装命令：[香港线路]
+```
+wget -O install.sh https://hk1-node.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh ed8484bec
+```
+* Ubuntu/Deepin安装命令：[欧美线路]
+```
+wget -O install.sh https://cf1-node.aapanel.com/install/install-ubuntu_6.0.sh && sudo bash install.sh ed8484bec
+```
+---
+* Debian安装命令：[默认线路]
 ```
 wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh ed8484bec
 ```
-* 万能安装命令：
+* Debian安装命令：[电信线路]
+```
+wget -O install.sh https://cmcc1-node.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh ed8484bec
+```
+* Debian安装命令：[香港线路]
+```
+wget -O install.sh https://hk1-node.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh ed8484bec
+```
+* Debian安装命令：[欧美线路]
+```
+wget -O install.sh https://cf1-node.aapanel.com/install/install-ubuntu_6.0.sh && bash install.sh ed8484bec
+```
+---
+* 万能安装命令：[默认线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec 
 ```
-* 国产龙芯架构安装命令:
+* 万能安装命令：[电信线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://cmcc1-node.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://cmcc1-node.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+```
+* 万能安装命令：[香港线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://hk1-node.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://hk1-node.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+```
+* 万能安装命令：[欧美线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://cf1-node.aapanel.com/install/install_panel.sh;else wget -O install_panel.sh https://cf1-node.aapanel.com/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+```
+---
+* 国产龙芯架构安装命令:[默认线路]
 ```
 wget -O install_panel.sh https://download.bt.cn/install/0/loongarch64/loongarch64_install_panel.sh && bash install_panel.sh ed8484bec
+```
+* 国产龙芯架构安装命令:[电信线路]
+```
+wget -O install_panel.sh https://cmcc1-node.bt.cn/install/0/loongarch64/loongarch64_install_panel.sh && bash install_panel.sh ed8484bec
+```
+* 国产龙芯架构安装命令:[香港线路]
+```
+wget -O install_panel.sh https://hk1-node.bt.cn/install/0/loongarch64/loongarch64_install_panel.sh && bash install_panel.sh ed8484bec
+```
+* 国产龙芯架构安装命令:[欧美线路]
+```
+wget -O install_panel.sh https://cf1-node.aapanel.com/install/0/loongarch64/loongarch64_install_panel.sh && bash install_panel.sh ed8484bec
 ```
 
 ### 降级
