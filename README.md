@@ -1,4 +1,4 @@
-# 宝塔Linux历史版本存档
+# 宝塔Linux历史版本更新包存档
 本仓库所有版本的更新包通过 `download.bt.cn` 下载
 
 BTPanel 9.1.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)<br/>
@@ -10,7 +10,7 @@ BTPanel 9.1.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewth
 * 7.4.5之后的版本（不包括7.4.5）需要强制绑定手机号
 * 7.2.0之前的版本不推荐使用，因为代码改动过大，降级后无法正常使用
 * 8.0.5及以后的版本请在Releases自取
-* <del>9.1.0及以后的版本的站点默认404＆502界面出现宝塔的ad（仅中国大陆机器显示，海外机器无影响，可自行修改网站目录内的404.html）</del>国内版宝塔目前已移除该AD<br/><br/>
+* <del>9.1.0及以后的版本的站点默认404＆502界面出现宝塔的ad（仅中国大陆机器显示，海外机器无影响，可自行修改网站目录内的404.html）</del>  国内版宝塔目前已移除该AD<br/><br/>
 
 # 使用方法
 [宝塔回退7.4.5之前版本教程](https://blog.csdn.net/saygoodbyeyo/article/details/132534437)
