@@ -108,7 +108,7 @@ wget -O install_panel.sh https://hk1-node.bt.cn/install/0/loongarch64/loongarch6
 wget -O install_panel.sh https://cf1-node.aapanel.com/install/0/loongarch64/loongarch64_install_panel.sh && bash install_panel.sh ed8484bec
 ```
 -->
-* 官方安装命令：(9.2.0稳定版)[万能安装脚本]
+* 官方安装命令：(9.3.0稳定版)[万能安装脚本]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
