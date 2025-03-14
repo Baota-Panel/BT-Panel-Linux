@@ -1,7 +1,7 @@
 # 宝塔Linux历史版本更新包存档
 本仓库所有版本的更新包通过 `download.bt.cn` 下载
 
-BTPanel 9.4.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)<br/>
+BTPanel 9.5.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)<br/>
 
 注：正式版和LTS版本**不可混用**！！！
 
@@ -10,7 +10,7 @@ BTPanel 9.4.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewth
 * 7.4.5之后的版本（不包括7.4.5）需要强制绑定手机号
 * 7.2.0之前的版本不推荐使用，因为代码改动过大，降级后无法正常使用
 * 8.0.5及以后的版本请在Releases自取
-* <del>9.1.0及以后的版本的站点默认404＆502界面出现宝塔的ad（仅中国大陆机器显示，海外机器无影响，可自行修改网站目录内的404.html）</del>  国内版宝塔目前已移除该AD<br/><br/>
+* <del>9.1.0及以后的版本的站点默认404＆502界面出现宝塔的ad（仅中国大陆机器显示，海外机器无影响，可自行修改网站目录内的404.html）</del>  <del>国内版宝塔目前已移除该AD</del> 9.3.0又加回来了，淦！<br/><br/>
 
 # 使用方法
 [宝塔回退7.4.5之前版本教程](https://blog.csdn.net/saygoodbyeyo/article/details/132534437)
@@ -108,7 +108,7 @@ wget -O install_panel.sh https://hk1-node.bt.cn/install/0/loongarch64/loongarch6
 wget -O install_panel.sh https://cf1-node.aapanel.com/install/0/loongarch64/loongarch64_install_panel.sh && bash install_panel.sh ed8484bec
 ```
 -->
-* 官方安装命令：(9.4.0稳定版)[万能安装脚本]
+* 官方安装命令：(9.5.0稳定版)[万能安装脚本]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
