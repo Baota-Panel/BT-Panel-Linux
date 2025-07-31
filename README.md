@@ -153,7 +153,7 @@ if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_la
 ### V9.5.0
 * 官方安装命令：(9.5.0稳定版) [通用安装脚本] [默认线路]
 ```
-if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_nearest.sh;else wget -O install_nearest.sh https://download.bt.cn/install/install_nearest.sh;fi;bash install_nearest.sh ed8484bec
 ```
 
 ### V9.4.0
