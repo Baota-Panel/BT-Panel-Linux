@@ -1,10 +1,11 @@
 # 宝塔Linux历史版本更新包存档
 本仓库所有版本的更新包通过 `download.bt.cn` 下载
 
-BTPanel 9.5.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)<br/>
+BTPanel 9.6.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)<br/>
 
 注：正式版和LTS版本**不可混用**！！！
 
+<!--
 # 版本说明
 * 7.4.2版本有pma漏洞
 * 7.4.5之后的版本（不包括7.4.5）需要强制绑定手机号
@@ -18,11 +19,13 @@ BTPanel 9.5.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewth
 [宝塔回退7.7.0版本，修改js绕过登陆限制](https://blog.csdn.net/saygoodbyeyo/article/details/132540562)
 
 [宝塔免费使用专业版插件教程](https://blog.csdn.net/saygoodbyeyo/article/details/132542724)
+-->
 
+<!--
 ### 安装宝塔
 
 先使用宝塔官方的安装脚本安装最新版宝塔
-<!--
+
 * Centos安装命令：[默认线路]
 ```
 yum install -y wget && wget -O install.sh https://download.bt.cn/install/install_6.0.sh && sh install.sh ed8484bec
@@ -108,11 +111,64 @@ wget -O install_panel.sh https://hk1-node.bt.cn/install/0/loongarch64/loongarch6
 wget -O install_panel.sh https://cf1-node.aapanel.com/install/0/loongarch64/loongarch64_install_panel.sh && bash install_panel.sh ed8484bec
 ```
 -->
-* 官方安装命令：(9.5.0稳定版)[万能安装脚本]
+
+## 一键安装脚本
+
+### V9.6.0
+* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [默认线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+```
+* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [电信线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://cmcc1-node.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://cmcc1-node.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+```
+* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [香港线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://hk1-node.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://hk1-node.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+```
+* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [欧美线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://cf1-node.aapanel.com/install/install_panel.sh;else wget -O install_panel.sh https://cf1-node.aapanel.com/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+```
+* 官方安装命令：(9.6.0稳定版) [CentOS/OpenCloudOS/AlibabaCloud] [默认线路]
+```
+url=https://download.bt.cn/install/install_panel.sh;if [ -f /usr/bin/curl ];then curl -sSO $url;else wget -O install_panel.sh $url;fi;bash install_panel.sh ed8484bec
+```
+* 官方安装命令：(9.6.0稳定版) [Debian] [默认线路]
+```
+wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh && bash install_panel.sh ed8484bec
+```
+* 官方安装命令：(9.6.0稳定版) [Ubuntu/Deepin] [默认线路]
+```
+wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh && sudo bash install_panel.sh ed8484bec
+```
+
+### V11.0.0
+* 官方安装命令：(11.0.0稳定版) [通用安装脚本] [默认线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_latest.sh;else wget -O install_latest.sh https://download.bt.cn/install/install_latest.sh;fi;bash install_latest.sh ed8484bec
+```
+
+### V9.5.0
+* 官方安装命令：(9.5.0稳定版) [通用安装脚本] [默认线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
 
+### V9.4.0
+* 官方安装命令：(9.4.0稳定版) [通用安装脚本] [默认线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_second_nearest.sh;else wget -O install_second_nearest.sh https://download.bt.cn/install/install_second_nearest.sh;fi;bash install_second_nearest.sh ed8484bec
+```
+
+### V9.6.0(企业版试用14天)
+* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [默认线路]
+```
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_ltd.sh;else wget -O install_ltd.sh https://download.bt.cn/install/install_ltd.sh;fi;bash install_ltd.sh ed8484bec
+```
+
+<!--
 ### 降级
 * 下载curl包
 ```
@@ -196,3 +252,4 @@ echo "127.0.0.1 www.bt.cn" >> /etc/hosts
 * Q：降级后登录宝塔面板时无法显示验证码图片或无法下载文件
 
   S：需要将/www/server/panel/BTPanel/\_\_init\_\_.py文件中的send_file函数中的cache_timeout参数名改为max_age
+-->
