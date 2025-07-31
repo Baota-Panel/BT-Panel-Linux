@@ -1,7 +1,9 @@
 # 宝塔Linux历史版本更新包存档
 本仓库所有版本的更新包通过 `download.bt.cn` 下载
 
-BTPanel 9.6.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)<br/>
+BTPanel 9.6.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)
+
+BTPanel 11.0.0正式版更新日志：宝塔论坛暂无，请到 [Releases](https://github.com/Baota-Panel/BT-Panel-Linux/releases) 页面查看
 
 注：正式版和LTS版本**不可混用**！！！
 
