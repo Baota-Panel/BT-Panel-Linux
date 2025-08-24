@@ -1,9 +1,7 @@
 # 宝塔Linux历史版本更新包存档
 本仓库所有版本的更新包通过 `download.bt.cn` 下载
 
-BTPanel 9.6.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)
-
-BTPanel 11.0.0正式版更新日志：宝塔论坛暂无，请到 [Releases](https://github.com/Baota-Panel/BT-Panel-Linux/releases) 页面查看
+BTPanel 11.0.0正式版更新日志：[https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376](https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=19376)
 
 注：正式版和LTS版本**不可混用**！！！
 
@@ -116,56 +114,50 @@ wget -O install_panel.sh https://cf1-node.aapanel.com/install/0/loongarch64/loon
 
 ## 一键安装脚本
 
-### V9.6.0
-* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [默认线路]
+### V11.0.0
+* 官方安装命令：(11.0.0稳定版) [通用安装脚本] [默认线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [电信线路]
+* 官方安装命令：(11.0.0稳定版) [通用安装脚本] [电信线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://cmcc1-node.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://cmcc1-node.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [香港线路]
+* 官方安装命令：(11.0.0稳定版) [通用安装脚本] [香港线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://hk1-node.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://hk1-node.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [欧美线路]
+* 官方安装命令：(11.0.0稳定版) [通用安装脚本] [欧美线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://cf1-node.aapanel.com/install/install_panel.sh;else wget -O install_panel.sh https://cf1-node.aapanel.com/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(9.6.0稳定版) [CentOS/OpenCloudOS/AlibabaCloud] [默认线路]
+* 官方安装命令：(11.0.0稳定版) [CentOS/OpenCloudOS/AlibabaCloud] [默认线路]
 ```
 url=https://download.bt.cn/install/install_panel.sh;if [ -f /usr/bin/curl ];then curl -sSO $url;else wget -O install_panel.sh $url;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(9.6.0稳定版) [Debian] [默认线路]
+* 官方安装命令：(11.0.0稳定版) [Debian] [默认线路]
 ```
 wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh && bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(9.6.0稳定版) [Ubuntu/Deepin] [默认线路]
+* 官方安装命令：(11.0.0稳定版) [Ubuntu/Deepin] [默认线路]
 ```
 wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh && sudo bash install_panel.sh ed8484bec
 ```
 
-### V11.0.0
-* 官方安装命令：(11.0.0稳定版) [通用安装脚本] [默认线路]
+### V9.6.0
+* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [默认线路]
 ```
-if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_latest.sh;else wget -O install_latest.sh https://download.bt.cn/install/install_latest.sh;fi;bash install_latest.sh ed8484bec
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_nearest.sh;else wget -O install_nearest.sh https://download.bt.cn/install/install_nearest.sh;fi;bash install_nearest.sh ed8484bec
 ```
 
 ### V9.5.0
 * 官方安装命令：(9.5.0稳定版) [通用安装脚本] [默认线路]
 ```
-if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_nearest.sh;else wget -O install_nearest.sh https://download.bt.cn/install/install_nearest.sh;fi;bash install_nearest.sh ed8484bec
-```
-
-### V9.4.0
-* 官方安装命令：(9.4.0稳定版) [通用安装脚本] [默认线路]
-```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_second_nearest.sh;else wget -O install_second_nearest.sh https://download.bt.cn/install/install_second_nearest.sh;fi;bash install_second_nearest.sh ed8484bec
 ```
 
-### V9.6.0(企业版试用14天)
-* 官方安装命令：(9.6.0稳定版) [通用安装脚本] [默认线路]
+### V11.0.0(企业版试用14天)
+* 官方安装命令：(11.0.0稳定版) [通用安装脚本] [默认线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_ltd.sh;else wget -O install_ltd.sh https://download.bt.cn/install/install_ltd.sh;fi;bash install_ltd.sh ed8484bec
 ```
