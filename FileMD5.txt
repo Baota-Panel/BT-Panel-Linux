@@ -180,4 +180,5 @@ LinuxPanel-9.3.0.zip : 206b6029d7e3e361cfc87fcaf549a2ac
 LinuxPanel-9.4.0.zip : ce2b0c6f9ec0fe10e9b8227d473d1fb4
 LinuxPanel-9.5.0.zip : 6c64e4f8f854a85e793dc912043eb734
 LinuxPanel-9.6.0.zip : 6ac52b250998c35c36e3333630ee3145
-LinuxPanel-11.0.0.zip : c2bba99e53ad84bc0d1b48b04448c11f
+LinuxPanel-11.0.0.zip : d24c4513af71011120a97e5f298be892
+LinuxPanel-11.1.0.zip : 61b5ce3f9a345369b2645aa090ad0f82
