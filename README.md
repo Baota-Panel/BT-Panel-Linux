@@ -147,7 +147,7 @@ wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh && sudo
 ### V11.2.0
 * 官方安装命令：(11.2.0正式版) [通用安装脚本] [默认线路]
 ```
-if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_latest.sh;else wget -O install_latest.sh https://download.bt.cn/install/install_latest.sh;fi;bash install_latest.sh la1027112
 ```
 
 ### V9.6.0
