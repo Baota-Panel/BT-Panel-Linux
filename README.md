@@ -1,7 +1,7 @@
 # 宝塔Linux历史版本更新包存档
 本仓库所有版本的更新包通过 `download.bt.cn` 下载
 
-BTPanel 11.1.0正式版更新日志：[https://www.bt.cn/bbs/thread-19376-1-1.html](https://www.bt.cn/bbs/thread-19376-1-1.html)
+BTPanel 11.2.0正式版更新日志：[https://www.bt.cn/bbs/thread-19376-1-1.html](https://www.bt.cn/bbs/thread-19376-1-1.html)
 
 注：正式版和LTS版本**不可混用**！！！
 
