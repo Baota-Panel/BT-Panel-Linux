@@ -114,38 +114,38 @@ wget -O install_panel.sh https://cf1-node.aapanel.com/install/0/loongarch64/loon
 
 ## 一键安装脚本
 
-### V11.1.0
-* 官方安装命令：(11.1.0正式版) [通用安装脚本] [默认线路]
+### V11.2.0
+* 官方安装命令：(11.2.0正式版) [通用安装脚本] [默认线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(11.1.0正式版) [通用安装脚本] [电信线路]
+* 官方安装命令：(11.2.0正式版) [通用安装脚本] [电信线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://cmcc1-node.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://cmcc1-node.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(11.1.0正式版) [通用安装脚本] [香港线路]
+* 官方安装命令：(11.2.0正式版) [通用安装脚本] [香港线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://hk1-node.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://hk1-node.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(11.1.0正式版) [通用安装脚本] [欧美线路]
+* 官方安装命令：(11.2.0正式版) [通用安装脚本] [欧美线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://cf1-node.aapanel.com/install/install_panel.sh;else wget -O install_panel.sh https://cf1-node.aapanel.com/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(11.1.0正式版) [CentOS/OpenCloudOS/AlibabaCloud] [默认线路]
+* 官方安装命令：(11.2.0正式版) [CentOS/OpenCloudOS/AlibabaCloud] [默认线路]
 ```
 url=https://download.bt.cn/install/install_panel.sh;if [ -f /usr/bin/curl ];then curl -sSO $url;else wget -O install_panel.sh $url;fi;bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(11.1.0正式版) [Debian] [默认线路]
+* 官方安装命令：(11.2.0正式版) [Debian] [默认线路]
 ```
 wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh && bash install_panel.sh ed8484bec
 ```
-* 官方安装命令：(11.1.0正式版) [Ubuntu/Deepin] [默认线路]
+* 官方安装命令：(11.2.0正式版) [Ubuntu/Deepin] [默认线路]
 ```
 wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh && sudo bash install_panel.sh ed8484bec
 ```
 
-### V11.2.0
-* 官方安装命令：(11.2.0正式版) [通用安装脚本] [默认线路]
+### V11.3.0
+* 官方安装命令：(11.3.0正式版) [通用安装脚本] [默认线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_latest.sh;else wget -O install_latest.sh https://download.bt.cn/install/install_latest.sh;fi;bash install_latest.sh la1027112
 ```
@@ -162,7 +162,7 @@ if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_ne
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_second_nearest.sh;else wget -O install_second_nearest.sh https://download.bt.cn/install/install_second_nearest.sh;fi;bash install_second_nearest.sh ed8484bec
 ```
 
-### V11.1.0(企业版试用14天)
+### V11.2.0(企业版试用14天)
 * 官方安装命令：(11.1.0正式版) [通用安装脚本] [默认线路]
 ```
 if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_ltd.sh;else wget -O install_ltd.sh https://download.bt.cn/install/install_ltd.sh;fi;bash install_ltd.sh ed8484bec
