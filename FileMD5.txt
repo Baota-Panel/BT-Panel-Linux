@@ -184,3 +184,4 @@ LinuxPanel-11.0.0.zip : d24c4513af71011120a97e5f298be892
 LinuxPanel-11.1.0.zip : 0532b6d81ff3c8769acad83d84ba2f71
 LinuxPanel-11.2.0.zip : df724ed5c0fce4d715b7ce1d013f215b
 LinuxPanel-11.3.0.zip : 4b2d36852c7a7a3ac22fbc464c42c109
+LinuxPanel-11.4.0.zip : ed29d68856a2970d28a357b6a44e357f
